@@ -16,6 +16,8 @@ return [
     'important' => 'Important',
     'warning' => 'Warning',
     'information' => 'Information',
+    'dashboard' => 'Dashboard',
     'user_management' => 'User Management',
+
 
 ];

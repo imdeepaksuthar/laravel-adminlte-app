@@ -109,7 +109,16 @@ return [
     | confirmation screen. By default, the timeout lasts for three hours.
     |
     */
-
+    'verification' => [
+        'email' => [
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],
+    'password_confirmation' => [
+        'expire' => 60,
+        'throttle' => 60,
+    ],
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
 ];

@@ -8,34 +8,36 @@
 @endsection
 
 @section('content')
-<div class="card">
-    <div class="card-header p-2">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
-            <li class="nav-item"><a class="nav-link" href="#site" data-toggle="tab">Site Settings</a></li>
-            <li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">Change Password</a></li>
-        </ul>
-    </div><!-- /.card-header -->
-    <div class="card-body">
-        <div class="tab-content">
-            <!-- Profile Settings -->
-            <div class="tab-pane active" id="profile">
-                <form method="POST" action="{{ route('admin.settings') }}">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input value="{{ Auth::user()->name }}" type="text" class="form-control" name="name" id="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input value="{{ Auth::user()->email }}" type="email" class="form-control" name="email" id="email">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Save Profile</button>
-                </form>
-            </div>
+    <div class="card">
+        <div class="card-header p-2">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
+                {{-- <li class="nav-item"><a class="nav-link" href="#site" data-toggle="tab">Site Settings</a></li> --}}
+                <li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">Change Password</a></li>
+            </ul>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+            <div class="tab-content">
+                <!-- Profile Settings -->
+                <div class="tab-pane active" id="profile">
+                    <form method="POST" action="{{ route('admin.settings.updateProfile') }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input value="{{ Auth::user()->name }}" type="text" class="form-control" name="name"
+                                id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input value="{{ Auth::user()->email }}" readonly="readonly" type="email" class="form-control"
+                                name="email" id="email">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Save Profile</button>
+                    </form>
+                </div>
 
-            <!-- Site Settings -->
+                {{-- <!-- Site Settings -->
             <div class="tab-pane" id="site">
                 <form method="POST" action="{{ route('admin.settings') }}" enctype="multipart/form-data">
                     @csrf
@@ -50,29 +52,43 @@
                     </div>
                     <button class="btn btn-success" type="submit">Update Site</button>
                 </form>
-            </div>
+            </div> --}}
 
-            <!-- Change Password -->
-            <div class="tab-pane" id="password">
-                <form method="POST" action="{{ route('admin.settings') }}">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="current_password">Current Password</label>
-                        <input type="password" class="form-control" name="current_password" id="current_password">
-                    </div>
-                    <div class="form-group">
-                        <label for="new_password">New Password</label>
-                        <input type="password" class="form-control" name="new_password" id="new_password">
-                    </div>
-                    <div class="form-group">
-                        <label for="new_password_confirmation">Confirm New Password</label>
-                        <input type="password" class="form-control" name="new_password_confirmation" id="new_password_confirmation">
-                    </div>
-                    <button class="btn btn-warning" type="submit">Change Password</button>
-                </form>
+                <!-- Change Password -->
+                <div class="tab-pane" id="password">
+                    <form method="POST" action="{{ route('admin.settings.updatePassword') }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="current_password">Current Password</label>
+                            <input type="password" class="form-control" name="current_password" id="current_password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password">New Password</label>
+                            <input type="password" class="form-control" name="new_password" id="new_password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password_confirmation">Confirm New Password</label>
+                            <input type="password" class="form-control" name="new_password_confirmation"
+                                id="new_password_confirmation">
+                        </div>
+                        <button class="btn btn-warning" type="submit">Change Password</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </div><!-- /.card-body -->
-</div>
+        </div><!-- /.card-body -->
+    </div>
+@endsection
+@section('js')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: "{{ session('success') }}",
+                showConfirmButton: true,
+                timer: 3000
+            });
+        </script>
+    @endif
 @endsection
