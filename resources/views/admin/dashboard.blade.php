@@ -1,16 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Admin Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
-@endsection
+    <h1>Admin Dashboard</h1>
+@stop
 
 @section('content')
-    <div class="card">
-        <div class="card-body">
-
-
-        </div>
-    </div>
-@endsection
+    <p>Welcome to your AdminLTE Dashboard!</p>
+@stop
